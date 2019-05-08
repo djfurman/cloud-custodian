@@ -84,7 +84,19 @@ Quick Install
 Usage
 -----
 
-First a policy file needs to be created in YAML format, as an example
+First a role must be created with the appropriate permissions for custodian to act on the resources
+described in the policies yaml given as an example below.
+For convenience, an _`example policy <_static/custodian-quickstart-policy.json>`_
+is provided for this quick start guide.
+
+To implement the policy, open the AWS console,
+navigate to IAM -> Policies and use the `json` option to copy the example policy as a new AWS IAM Policy.
+Name the policy as something recognizable and save it.
+
+Next navigate to IAM -> Roles and create a role called `CloudCustodian-QuickStart`
+and assign the role the policy created above. Then you are ready continue and run custodian.
+
+A custodian policy file needs to be created in YAML format, as an example
 
 .. code-block:: yaml
 
@@ -105,6 +117,7 @@ First a policy file needs to be created in YAML format, as an example
       unencrypted volumes.
     mode:
       type: cloudtrail
+      role: CloudCustodian-QuickStart
       events:
         - RunInstances
     filters:
